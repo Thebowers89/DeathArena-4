@@ -2,7 +2,6 @@ package Kerlab.DeathArena.Utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,8 +16,10 @@ public class ArenaManager {
         File file = new File(Bukkit.getServer().getPluginManager().getPlugin("DeathArena-4").getDataFolder() + "/Arenas.yml");
         YamlConfiguration myFile = YamlConfiguration.loadConfiguration(file);
         for (String name : myFile.getConfigurationSection("Arenas").getKeys(false)) {
-            Arena a = new Arena(name, false);
-            a.load();
+            if (!name.equals("IgnoreThis")) {
+                Arena a = new Arena(name, false);
+                a.load();
+            }
         }
     }
 
@@ -94,9 +95,21 @@ public class ArenaManager {
         return false;
     }
 
+    public static Arena getArena(String name) {
+        for (Arena a : arenas) {
+            if (a.getName().equalsIgnoreCase(name)) {
+                return a;
+            }
+        }
+        return null;
+    }
+
     public static Arena getRandomArena() {
         Random rand = new Random();
-        return arenas.get(rand.nextInt(arenas.size()));
+        System.out.println(arenas.size());
+        int random = rand.nextInt(arenas.size());
+        System.out.println(random);
+        return arenas.get(random);
     }
 
 }

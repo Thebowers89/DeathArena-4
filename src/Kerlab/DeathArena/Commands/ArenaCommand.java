@@ -1,6 +1,9 @@
 package Kerlab.DeathArena.Commands;
 
 import Kerlab.DeathArena.Utils.ArenaManager;
+import Kerlab.DeathArena.Utils.ArenaUtils;
+import Kerlab.DeathArena.Utils.Game;
+import Kerlab.DeathArena.Utils.GameManager;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -72,13 +75,45 @@ public class ArenaCommand implements CommandExecutor {
                         return true;
                     }
                 } else if (input.equalsIgnoreCase("join")) {
-
+                    //TODO add logic for players to join games by id -- probably wont be used much
+                } else if (input.equalsIgnoreCase("config")) {
+                    if (player.isOp() || player.hasPermission("DeathArena-4.Modify")) {
+                        if (ArenaManager.doesExist(name)) {
+                            player.sendMessage("Configuring " + name);
+                            ArenaUtils.players.put(player, ArenaManager.getArena(name));
+                            player.openInventory(ArenaUtils.configInventory());
+                            return true;
+                        } else {
+                            player.sendMessage(ChatColor.RED + "That Arena does not exist!");
+                            return true;
+                        }
+                    } else {
+                        player.sendMessage(ChatColor.RED + "You are not allowed to do this!");
+                        return true;
+                    }
                 }
             } else {
                 if (args[0].equalsIgnoreCase("leave")) {
-
+                    if (GameManager.playerGames.containsKey(player)) {
+                        Game game = GameManager.playerGames.get(player);
+                        game.removePlayer(player);
+                        player.sendMessage(ChatColor.GOLD + "Leaving game!");
+                        return true;
+                    } else {
+                        player.sendMessage(ChatColor.RED + "You are not in a game!");
+                        return true;
+                    }
                 } else if (args[0].equalsIgnoreCase("list")) {
-
+                    player.sendMessage(ChatColor.GREEN + "Showing all active games:");
+                    for (Game game : GameManager.games) {
+                        StringBuilder sb = new StringBuilder();
+                        sb.append("Game: ");
+                        sb.append(game.getId());
+                        sb.append(" State: ");
+                        sb.append(game.getState().getString());
+                        player.sendMessage("    " + sb.toString());
+                    }
+                    return true;
                 }
             }
             player.sendMessage(ChatColor.RED + "Invalid Syntax!");

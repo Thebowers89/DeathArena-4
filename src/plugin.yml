@@ -1,0 +1,7 @@
+name: DeathArena-4
+version: 0
+main: Kerlab.DeathArena.MainClass
+commands:
+    deatharena:
+        usage:
+        description:

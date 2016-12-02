@@ -2,9 +2,12 @@ package Kerlab.DeathArena;
 
 import Kerlab.DeathArena.Commands.ArenaCommand;
 import Kerlab.DeathArena.Utils.ArenaManager;
+import Kerlab.DeathArena.Utils.ArenaUtils;
+import Kerlab.DeathArena.Utils.GameManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -25,21 +28,24 @@ public class MainClass extends JavaPlugin {
     }
 
     private void registerCommands() {
-        getCommand("arena").setExecutor(new ArenaCommand());
+        getCommand("deatharena").setExecutor(new ArenaCommand());
     }
 
     private void registerEvents() {
-
+        PluginManager pm = getServer().getPluginManager();
+        pm.registerEvents(new ArenaUtils(), this);
+        pm.registerEvents(new GameManager(), this);
     }
 
     private void verifyFiles() {
         File file = new File(Bukkit.getServer().getPluginManager().getPlugin("DeathArena-4").getDataFolder() + "/Arenas.yml");
-        if (file.exists()) {
-            Bukkit.getLogger().log(Level.INFO, ChatColor.YELLOW + "Arena file not found!");
+        if (!file.exists()) {
+            Bukkit.getLogger().log(Level.INFO, "[DeathArena-4] Arena file not found!");
             YamlConfiguration myFile = YamlConfiguration.loadConfiguration(file);
             try {
+                myFile.set("Arenas.IgnoreThis", "IgnoreThis");
                 myFile.save(file);
-                Bukkit.getLogger().log(Level.INFO, ChatColor.GREEN + "Creating Arena File!");
+                Bukkit.getLogger().log(Level.INFO, "[DeathArena-4] Creating Arena File!");
             } catch (IOException e) {
                 e.printStackTrace();
             }

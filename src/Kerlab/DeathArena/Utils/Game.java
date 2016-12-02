@@ -4,7 +4,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class Game {
@@ -13,7 +14,7 @@ public class Game {
     private UUID bossId;
     private Sign sign;
     private Arena arena;
-    private ArrayList<Player> players = new ArrayList<>();
+    private HashMap<Player, Boolean> players = new HashMap<>();
 
     private State state = State.STOPPED;
 
@@ -25,7 +26,8 @@ public class Game {
 
     public void addPlayer(Player player) {
         if (this.state.equals(State.STOPPED)) {
-            players.add(player);
+            players.put(player, false);
+            player.teleport(arena.getLobby());
         } else {
             player.sendMessage(ChatColor.RED + "You cannot join a game in progress!");
         }
@@ -33,6 +35,24 @@ public class Game {
 
     public void removePlayer(Player player) {
         players.remove(player);
+    }
+
+    public void preparationTick(Player player) {
+        if (players.get(player)) {
+            players.put(player, false);
+        } else {
+            players.put(player, true);
+            readyCheck();
+        }
+    }
+
+    public void readyCheck() {
+        for (Map.Entry<Player, Boolean> map : players.entrySet()) {
+            if (!map.getValue()) {
+                break;
+            }
+        }
+        start();
     }
 
     public void start() {

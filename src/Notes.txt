@@ -1,2 +1,2 @@
 //TODO Look at this!
-For join signs, just assign a game to a sign, and when game is over, reset the sign...
+fix the null pointer exception in the location configuration and look at the process of arena loading and creation
