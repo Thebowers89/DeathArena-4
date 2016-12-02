@@ -63,18 +63,22 @@ public class ArenaUtils implements Listener {
                         Location location = e.getWhoClicked().getLocation();
                         File file = new File(Bukkit.getServer().getPluginManager().getPlugin("DeathArena-4").getDataFolder() + "/Arenas.yml");
                         LocationUtils.saveLocation(file, location, "Arenas." + players.get(e.getWhoClicked()).getName() + ".BossSpawn");
+                        players.get(e.getWhoClicked()).load();
                         e.getWhoClicked().sendMessage(ChatColor.GOLD + "Boss Spawn set!");
                     } else if (item.equals(playerLocation())) {
                         Location location = e.getWhoClicked().getLocation();
                         File file = new File(Bukkit.getServer().getPluginManager().getPlugin("DeathArena-4").getDataFolder() + "/Arenas.yml");
                         LocationUtils.saveLocation(file, location, "Arenas." + players.get(e.getWhoClicked()).getName() + ".PlayerSpawn");
+                        players.get(e.getWhoClicked()).load();
                         e.getWhoClicked().sendMessage(ChatColor.GOLD + "Player Spawn set!");
                     } else if (item.equals(lobbyLocation())) {
                         Location location = e.getWhoClicked().getLocation();
                         File file = new File(Bukkit.getServer().getPluginManager().getPlugin("DeathArena-4").getDataFolder() + "/Arenas.yml");
                         LocationUtils.saveLocation(file, location, "Arenas." + players.get(e.getWhoClicked()).getName() + ".Lobby");
+                        players.get(e.getWhoClicked()).load();
                         e.getWhoClicked().sendMessage(ChatColor.GOLD + "Lobby Spawn set!");
                     }
+                    e.setCancelled(true);
                 }
             }
         }

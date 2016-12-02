@@ -35,6 +35,9 @@ public class Game {
 
     public void removePlayer(Player player) {
         players.remove(player);
+        if (players.size() == 0) {
+            end();
+        }
     }
 
     public void preparationTick(Player player) {
@@ -61,8 +64,10 @@ public class Game {
     }
 
     public void end() {
-        this.state = State.PAUSED;
+        this.state = State.ENDING;
         //TODO End game logic here
+        GameManager.correctSign(this.sign);
+        GameManager.games.remove(this);
     }
 
     public void setBossId(UUID id) {

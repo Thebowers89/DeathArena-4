@@ -6,7 +6,7 @@ public enum State {
 
     STOPPED(ChatColor.RED + "Stopped"),
     RUNNING(ChatColor.GREEN + "Running"),
-    PAUSED(ChatColor.AQUA + "Paused");
+    ENDING(ChatColor.AQUA + "ENDING");
 
     String string;
 

@@ -52,4 +52,8 @@ public class Arena {
         return this.lobby;
     }
 
+    public Location[] debug() {
+        return new Location[] {playerSpawn, bossSpawn, lobby};
+    }
+
 }

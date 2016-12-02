@@ -96,6 +96,7 @@ public class ArenaCommand implements CommandExecutor {
                 if (args[0].equalsIgnoreCase("leave")) {
                     if (GameManager.playerGames.containsKey(player)) {
                         Game game = GameManager.playerGames.get(player);
+                        GameManager.playerGames.remove(player);
                         game.removePlayer(player);
                         player.sendMessage(ChatColor.GOLD + "Leaving game!");
                         return true;

@@ -29,6 +29,7 @@ public class MainClass extends JavaPlugin {
 
     private void registerCommands() {
         getCommand("deatharena").setExecutor(new ArenaCommand());
+        getCommand("debug").setExecutor(new DebugCommand());
     }
 
     private void registerEvents() {

@@ -5,3 +5,6 @@ commands:
     deatharena:
         usage:
         description:
+    debug:
+        usage:
+        description:

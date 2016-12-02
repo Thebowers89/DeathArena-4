@@ -91,9 +91,10 @@ public class GameManager implements Listener {
                     Sign sign = (Sign) e.getClickedBlock().getState();
                     if (sign.getLine(0).equals("create game sign")) {
                         //System.out.println("test5");
-                        sign.setLine(0, "");
+                        sign.setLine(0, " ");
                         sign.setLine(1, ChatColor.GOLD + "Right-Click");
                         sign.setLine(2, ChatColor.GOLD + "to create game");
+                        sign.setLine(3, " ");
                         sign.update();
                     }
                 }

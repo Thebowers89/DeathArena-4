@@ -2,6 +2,7 @@ package Kerlab.DeathArena.Utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,12 +13,19 @@ public class ArenaManager {
 
     public static ArrayList<Arena> arenas = new ArrayList<>();
 
+    public static void debug(Player player) {
+        for (Arena a : arenas) {
+            player.sendMessage(a.getName());
+        }
+    }
+
     public static void loadArenas() {
         File file = new File(Bukkit.getServer().getPluginManager().getPlugin("DeathArena-4").getDataFolder() + "/Arenas.yml");
         YamlConfiguration myFile = YamlConfiguration.loadConfiguration(file);
         for (String name : myFile.getConfigurationSection("Arenas").getKeys(false)) {
             if (!name.equals("IgnoreThis")) {
                 Arena a = new Arena(name, false);
+                arenas.add(a);
                 a.load();
             }
         }
@@ -72,6 +80,7 @@ public class ArenaManager {
         for (String string : myFile.getConfigurationSection("Arenas").getKeys(false)) {
             if (string.equals(name)) {
                 Arena a = new Arena(name, false);
+                arenas.add(a);
                 a.load();
                 return true;
             }
