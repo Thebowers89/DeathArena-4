@@ -48,9 +48,17 @@ public class GameManager implements Listener {
     }
 
     public static void correctSign(Sign sign) {
+        sign.setLine(0, " ");
         sign.setLine(1, ChatColor.GOLD + "Right-Click");
         sign.setLine(2, ChatColor.GOLD + "to create game");
+        sign.setLine(3, " ");
         sign.update();
+    }
+
+    public static void playerJoin(Player player, Game game) {
+        game.addPlayer(player);
+        playerGames.put(player, game);
+        player.sendMessage(ChatColor.GOLD + "Joining game!");
     }
 
     @EventHandler
@@ -81,16 +89,11 @@ public class GameManager implements Listener {
 
     @EventHandler
     public void onSign2(PlayerInteractEvent e) {
-        //System.out.println("test1");
         if (e.getPlayer().isOp() || e.getPlayer().hasPermission("DeathArena-4.Modify")) {
-           //System.out.println("test2");
             if (e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-               //System.out.println("test3");
                 if (e.getClickedBlock().getType().equals(Material.WALL_SIGN) || e.getClickedBlock().getType().equals(Material.SIGN_POST)) {
-                    //System.out.println("test4");
                     Sign sign = (Sign) e.getClickedBlock().getState();
                     if (sign.getLine(0).equals("create game sign")) {
-                        //System.out.println("test5");
                         sign.setLine(0, " ");
                         sign.setLine(1, ChatColor.GOLD + "Right-Click");
                         sign.setLine(2, ChatColor.GOLD + "to create game");

@@ -1,11 +1,11 @@
 package Kerlab.DeathArena;
 
 import Kerlab.DeathArena.Commands.ArenaCommand;
+import Kerlab.DeathArena.Commands.DAUtilsCommand;
 import Kerlab.DeathArena.Utils.ArenaManager;
 import Kerlab.DeathArena.Utils.ArenaUtils;
 import Kerlab.DeathArena.Utils.GameManager;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -29,6 +29,7 @@ public class MainClass extends JavaPlugin {
 
     private void registerCommands() {
         getCommand("deatharena").setExecutor(new ArenaCommand());
+        getCommand("dautils").setExecutor(new DAUtilsCommand());
         getCommand("debug").setExecutor(new DebugCommand());
     }
 

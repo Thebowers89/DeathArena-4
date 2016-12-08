@@ -1,2 +1,5 @@
 //TODO Look at this!
-fix the null pointer exception in the location configuration and look at the process of arena loading and creation
+Look for general improvements
+add beginning game logic
+and end game logic
+work on boss mechanics, possibly random bosses

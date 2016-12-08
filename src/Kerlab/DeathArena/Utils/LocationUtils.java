@@ -38,4 +38,10 @@ public class LocationUtils {
         return false;
     }
 
+    public static Location common() {
+        String path = "Locations.Common";
+        //TODO Finish this method
+        return null;
+    }
+
 }

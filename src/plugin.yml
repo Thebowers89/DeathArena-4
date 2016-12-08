@@ -8,3 +8,6 @@ commands:
     debug:
         usage:
         description:
+    dautils:
+        usage:
+        description:

@@ -75,7 +75,17 @@ public class ArenaCommand implements CommandExecutor {
                         return true;
                     }
                 } else if (input.equalsIgnoreCase("join")) {
-                    //TODO add logic for players to join games by id -- probably wont be used much
+                    int id;
+                    try {
+                        id = Integer.parseInt(name);
+                    } catch (NumberFormatException e) {
+                        player.sendMessage(ChatColor.RED + "This command uses arena id numbers which can be found on top of game signs!");
+                        return true;
+                    }
+                    if (GameManager.getGame(id) != null) {
+                        GameManager.playerJoin(player, GameManager.getGame(id));
+                        return true;
+                    }
                 } else if (input.equalsIgnoreCase("config")) {
                     if (player.isOp() || player.hasPermission("DeathArena-4.Modify")) {
                         if (ArenaManager.doesExist(name)) {
