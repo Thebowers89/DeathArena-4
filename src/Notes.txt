@@ -1,4 +1,5 @@
 //TODO Look at this!
+continue adding player limits on games
 Look for general improvements
 add beginning game logic
 and end game logic

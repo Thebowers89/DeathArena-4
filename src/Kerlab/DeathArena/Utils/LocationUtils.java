@@ -40,8 +40,8 @@ public class LocationUtils {
 
     public static Location common() {
         String path = "Locations.Common";
-        //TODO Finish this method
-        return null;
+        File file = new File(Bukkit.getServer().getPluginManager().getPlugin("DeathArena-4").getDataFolder() + "/Utils.yml");
+        return getLocation(file, path);
     }
 
 }

@@ -11,10 +11,12 @@ import java.util.UUID;
 public class Game {
 
     private int id;
+    private final int limit = 3;
     private UUID bossId;
     private Sign sign;
     private Arena arena;
     private HashMap<Player, Boolean> players = new HashMap<>();
+    private int playerAmount = players.size();
 
     private State state = State.STOPPED;
 
@@ -76,6 +78,10 @@ public class Game {
 
     public int getId() {
         return this.id;
+    }
+
+    public int getPlayerAmount() {
+        return this.playerAmount;
     }
 
     public Sign getSign() {

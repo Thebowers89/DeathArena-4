@@ -42,7 +42,6 @@ public class GameManager implements Listener {
         sign.setLine(0, ChatColor.RED + "[DA] " + game.getId());
         sign.setLine(1, ChatColor.AQUA + game.getArena().getName());
         sign.setLine(2, game.getState().getString());
-        //TODO add player limits to games
         sign.setLine(3, ChatColor.BLUE + "NYI");
         sign.update();
     }
@@ -56,6 +55,7 @@ public class GameManager implements Listener {
     }
 
     public static void playerJoin(Player player, Game game) {
+        //TODO add player limit logic here
         game.addPlayer(player);
         playerGames.put(player, game);
         player.sendMessage(ChatColor.GOLD + "Joining game!");
